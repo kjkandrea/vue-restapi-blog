@@ -191,3 +191,57 @@ https://wireframe.kr/tag/tag-name // tag-name Tag에 속한 Post 목록
 ```
 
 처리하는 입장에서는 매우 간단명료하나 사용자 편의, SEO 등을 고려할때 과연 이 방법이 최선일지에 대한 의문이 남는다. 우선 가벼운 마음으로 시작한 이 프로젝트가 기본적인 라우팅 작업에서 부터 병목이 생기는걸 원치 않아 이와 같은 방식으로 구성하기로 하였다.
+
+### 구현 (20200611)
+
+Nuxt 개발 환경에서는 routes.js를 생성하여 별도로 라우팅 규칙을 생성해야하는 작업이 생략된다. pages 디렉토리에 파일트리에 따라 자동으로 router 설정을 세팅하여 준다.
+공식문서를 참고하여 라우팅을 구현하자. [NUXTJS Guide : 라우팅](https://ko.nuxtjs.org/guide/routing/)
+
+사전 계획을 토대로 구성된 파일트리는 다음과 같다.
+
+```
+pages/
+--| page/
+-----| _slug.vue
+--| post/
+-----| _slug.vue
+--| category/
+-----| _slug.vue
+--| tag/
+-----| _slug.vue
+index.vue
+```
+
+위와 같은 파일트리를 구성하면 다음과 같은 설정이 자동으로 생성될 것이다.
+
+``` javascript
+router: {
+  routes: [
+    {
+      name: 'index',
+      path: '/',
+      component: 'pages/index.vue'
+    },
+    {
+      name: 'page-slug',
+      path: '/page/:slug?',
+      component: 'pages/page/_slug.vue'
+    },
+    {
+      name: 'post-slug',
+      path: '/posts/:slug?',
+      component: 'pages/post/_slug.vue'
+    },
+    {
+      name: 'category-slug',
+      path: '/category/:slug?',
+      component: 'pages/category/_slug.vue'
+    },
+    {
+      name: 'tag-slug',
+      path: '/tag/:slug?',
+      component: 'pages/tag/_slug.vue'
+    },
+  ]
+}
+```
