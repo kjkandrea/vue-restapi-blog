@@ -1,5 +1,7 @@
 <template>
   <v-app id="inspire">
+
+    <!-- aside navigation -->
     <v-navigation-drawer
       v-model="drawer"
       :clipped="$vuetify.breakpoint.lgAndUp"
@@ -74,7 +76,9 @@
         </template>
       </v-list>
     </v-navigation-drawer>
+    <!-- // navigation -->
 
+    <!-- header bar -->
     <v-app-bar
       :clipped-left="$vuetify.breakpoint.lgAndUp"
       app
@@ -98,6 +102,9 @@
       <v-spacer></v-spacer>
       <v-app-bar-nav-icon @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
     </v-app-bar>
+    <!--// header bar -->
+
+    <!-- content area -->
     <v-content>
       <v-container
         class="fill-height"
@@ -107,23 +114,11 @@
           align="center"
           justify="center"
         >
-          <v-tooltip right>
-            <template v-slot:activator="{ on }">
-              <v-btn
-                :href="source"
-                icon
-                large
-                target="_blank"
-                v-on="on"
-              >
-                <v-icon large>mdi-code-tags</v-icon>
-              </v-btn>
-            </template>
-            <span>Source</span>
-          </v-tooltip>
+          <nuxt />
         </v-row>
       </v-container>
     </v-content>
+    <!--// content area -->
   </v-app>
 </template>
 
@@ -133,39 +128,27 @@
       source: String,
     },
     data: () => ({
-      dialog: false,
       drawer: null,
       items: [
-        { icon: 'mdi-contacts', text: 'Contacts' },
-        { icon: 'mdi-history', text: 'Frequently contacted' },
-        { icon: 'mdi-content-copy', text: 'Duplicates' },
+        { icon: 'mdi-home', text: 'Home' },
+        { icon: 'mdi-account', text: 'About' },
         {
           icon: 'mdi-chevron-up',
           'icon-alt': 'mdi-chevron-down',
-          text: 'Labels',
-          model: true,
-          children: [
-            { icon: 'mdi-plus', text: 'Create label' },
-          ],
-        },
-        {
-          icon: 'mdi-chevron-up',
-          'icon-alt': 'mdi-chevron-down',
-          text: 'More',
+          text: 'Categories',
           model: false,
           children: [
-            { text: 'Import' },
-            { text: 'Export' },
-            { text: 'Print' },
-            { text: 'Undo changes' },
-            { text: 'Other contacts' },
+            { text: 'TIL (Today I Learned)' },
+            { text: 'javascript' },
+            { text: 'Vuejs' },
+            { text: 'React' },
+            { text: 'nodejs' },
+            { text: 'git' },
+            { text: 'webpack' },
+            { text: 'MySQL' },
+            { text: 'etc' }
           ],
-        },
-        { icon: 'mdi-cog', text: 'Settings' },
-        { icon: 'mdi-message', text: 'Send feedback' },
-        { icon: 'mdi-help-circle', text: 'Help' },
-        { icon: 'mdi-cellphone-link', text: 'App downloads' },
-        { icon: 'mdi-keyboard', text: 'Go to the old version' },
+        }
       ],
     }),
   }
