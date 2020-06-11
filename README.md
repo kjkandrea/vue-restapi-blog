@@ -100,7 +100,7 @@ npm run serve
 
 ### 베이스 layout 정의 (20200611)
 
-#### 기본 Vuetify 제공 탬플릿 활용
+#### Vuetify 탬플릿 'Google Contacts' 적용
 
 프로젝트를 시작하면 항상 레이아웃부터 정리하고 싶어진다.
 nuxt 환경에서 레이아웃을 정의하는 `layouts/default.vue` 파일을 내 취향 대로 정의해보겠다. Vuetify에서 제공하는 [Google Contacts 레이아웃](https://vuetifyjs.com/ko/examples/layouts/google-contacts/)을 사용하기로 하였다. 
@@ -116,4 +116,8 @@ vuetify: {
   }
 }
 ```
+
+#### 불필요 요소 제거 및 정리
+
+bell 버튼, contactUs등 기본으로 구성된 레이아웃은 필요가 없다. 이와 같은 요소들을 삭제하고 배치를 변경해주었다.
 
