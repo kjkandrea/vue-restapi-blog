@@ -64,3 +64,36 @@ Wordpress의 데이터베이스 구조, 백엔드를 활용하여 클라이언�
   * [ ] 해당 콘텐츠를 찾을 수 없습니다. 삭제되었거나, 없는 콘텐츠 입니다. 표시
 
 
+## 프론트엔드
+
+### Vue : Nuxt
+
+비교적 익숙한 Nuxt로 프론트엔드를 구축한다.
+
+### Nuxt 개발환경(보일러플레이트) 구성 (20200611)
+
+[create-nuxt-app](https://ko.nuxtjs.org/guide/installation/) 을 사용한다.
+프로젝트 디렉토리를 생성하고 다음 커맨드를 입력한다.
+
+```
+npm create-nuxt-app .
+```
+
+Generating 옵션은 다음과 같이 선택하였다.
+
+* Choose programming language : **JavaScript**
+* Choose the package manager : **Npm**
+* Choose UI framework : **Vuetify.js**
+* Choose custom server framework : **안쓸래요!**
+* Choose Nuxt.js modules : **Axios**
+* Choose linting tools : **안쓸래요!**
+* Choose rendering mode : **Single Page App**
+* Choose development tools : **jsconfig.json (Recommended for VS Code)**
+
+패키지 매니저는 익숙한 npm을 선택. UI framework는 Vuetify를 사용하기로 하였다. 모든 데이터 요청은 axios로 처리하기위해 Axios를 설치하였다. lint는 개인작업이여서 따로 구성하지 않았다. 
+
+패키지 인스톨이 완료되면 다음 커맨드를 입력하여 nuxt 실행이 잘 되는지 테스트한다.
+
+```
+npm run serve
+```
