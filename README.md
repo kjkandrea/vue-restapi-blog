@@ -128,3 +128,66 @@ vuetify: {
 레이아웃 정리가 완료되었다.
 
 ![layout](https://user-images.githubusercontent.com/32591477/84350853-16700a00-abf5-11ea-9a94-1e667d924f3e.jpg)
+
+
+## 라우팅
+
+클라이언트 사이드에서의 라우팅이란 사용자가 이전 버튼, 북마크를 사용하게끔 URL마다 화면을 만들어두거나, HTML5의 히스토리 API를 사용할 수 있게 하는 등 페이지를 구분하는 과정을 일컫는다.
+Wordpress 를 기조로 보면 `포스트(post), 페이지(page), 카테고리(category), 태그(tag)`와 같은 속성을 지닌 콘텐츠들이 저마다의 퍼머링크를 지니고 있다.
+
+### 사전 계획 (20200611)
+
+#### Wordpress의 글 이름 '퍼머링크' 구조를 모방하여 사용한다?
+
+퍼머링크 방식이란 Wordpress의 `슬러그(slug)` 를 매개로 퍼머링크를 만들어 사용자에게 콘텐츠를 제공하는 기본적인 방식이다. 이 방식을 모방하여 구현한다면 각 포스트, 페이지, 카테고리, 태그 콘텐츠들은 다음과 같은 형태의 url을 지니게 될 것이다.
+
+```
+https://wireframe.kr/about // About Page
+https://wireframe.kr/es6-const-let // const, let 을 주제로 다룬 Post
+https://wireframe.kr/javascript // javacript Category에 속한 Post 목록
+https://wireframe.kr/tag-name // tag-name Tag에 속한 Post 목록
+https://wireframe.kr/javascript/es6-const-let // javascript Category에 속한 const, let 을 주제로 다룬 Post
+https://wireframe.kr/tag-name/es6-const-let // tag-name Tag에 속한 const, let 을 주제로 다룬 Post
+```
+
+정리하자면 다음과 같다.
+
+``` javascript
+`https://wireframer.kr/${slug_name}` // Page
+`https://wireframer.kr/${slug_name}` // Post
+`https://wireframer.kr/${slug_name}` // Category
+`https://wireframer.kr/${slug_name}` // Tag
+`https://wireframer.kr/${category_slug}/${slug_name}` // Category/Post
+`https://wireframer.kr/${tag_slug}/${slug_name}` // Tag/Post
+```
+
+프론트엔드 라우팅의 입장에서 보자면 이는 상당히 중첩된 라우팅이다. `https://wireframer.kr/${slug_name}` 의 라우팅구조가 무려 4여개의 경우의 수를 지닌다. Wordpress REST API 를 커스텀하지 않고 활용하여서는 이와 같은 복잡성을 처리할 방안이 떠오르지 않아, 사례를 조사하여 보고자 다음과 같은 레포지토리를 찾아내었다.
+
+##### [Vue Wordpres : Notes on Permalink Structure](https://github.com/bucky355/vue-wordpress#notes-on-permalink-structure)
+
+> Problems with the permalink structure are generally because the router can't differentiate between a post and a page. While this may be solved with Navigation Guards and in component logic to check data and redirect when necessary, the introduced complexity is out of scope for this starter theme.
+
+해당 레포지토리의 기여자가 나와 동일한 문제에 직면한것으로 보이며, 이와 같은 문제에 대한 명확한 해결책을 현재 내가 가진 지식으로는 도출하기 힘들다는 결론을 내렸다.
+물론 대안은 있다. 
+
+#### 각 콘텐츠에 고유한 'base name'을 부여하는 형식
+
+이 방법이 가장 심플하게 퍼머링크를 배분하고, 그에따른 콘텐츠 데이터를 요청할 수 있는 방법이라는 결론에 이르렀다. 각 콘텐츠 별 `base-name` 을 통해 요청들의 과도한 중첩을 의도적으로 없애는 것이다. 매우 간단한 방식이며 다음과 같은 형태의 url을 지니게 될 것이다.
+
+```
+https://wireframe.kr/page/about // About Page
+https://wireframe.kr/post/es6-const-let // const, let 을 주제로 다룬 Post
+https://wireframe.kr/category/javascript // javacript Category에 속한 Post 목록
+https://wireframe.kr/tag/tag-name // tag-name Tag에 속한 Post 목록
+```
+
+정리하자면 다음과 같다.
+
+``` javascript
+`https://wireframer.kr/page/${slug_name}` // Page
+`https://wireframer.kr/post/${slug_name}` // Post
+`https://wireframer.kr/category/${slug_name}` // Category
+`https://wireframer.kr/tag/${slug_name}` // Tag
+```
+
+처리하는 입장에서는 매우 간단명료하나 사용자 편의, SEO 등을 고려할때 과연 이 방법이 최선일지에 대한 의문이 남는다. 우선 가벼운 마음으로 시작한 이 프로젝트가 기본적인 라우팅 작업에서 부터 병목이 생기는걸 원치 않아 이와 같은 방식으로 구성하기로 하였다.
