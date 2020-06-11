@@ -89,7 +89,7 @@
         style="width: 200px"
         class="ml-0 pl-4"
       >
-        <span class="hidden-sm-and-down">Wireframe</span>
+        <span>Wireframe</span>
       </v-toolbar-title>
       <v-text-field
         flat
