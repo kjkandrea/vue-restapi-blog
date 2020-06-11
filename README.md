@@ -97,3 +97,23 @@ Generating 옵션은 다음과 같이 선택하였다.
 ```
 npm run serve
 ```
+
+### 베이스 layout 정의 (20200611)
+
+#### 기본 Vuetify 제공 탬플릿 활용
+
+프로젝트를 시작하면 항상 레이아웃부터 정리하고 싶어진다.
+nuxt 환경에서 레이아웃을 정의하는 `layouts/default.vue` 파일을 내 취향 대로 정의해보겠다. Vuetify에서 제공하는 [Google Contacts 레이아웃](https://vuetifyjs.com/ko/examples/layouts/google-contacts/)을 사용하기로 하였다. 
+
+vuefity 레포지토리의 [google-contacts.vue](https://github.com/vuetifyjs/vuetify/blob/master/packages/docs/src/layouts/layouts/demos/google-contacts.vue)를 그대로 `layouts/default.vue`에 붙여 넣는다.
+
+저장 후 확인해보니 레이아웃은 잘 적용되었지만, vuetify의 베이스 테마가 black으로 설정되어 있어 위화감이 들었다. `nuxt.config.js 60열` 에서 컬러 스키마를 light로 변경해주었다.
+
+```
+vuetify: {
+  theme: {
+    light: true
+  }
+}
+```
+
