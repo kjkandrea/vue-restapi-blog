@@ -245,3 +245,120 @@ router: {
   ]
 }
 ```
+
+## Vuex로 데이터 다루기
+
+Vuex란 컴포넌트들의 데이터를 중앙집중형태로 관리하는 일종의 데이터 물류센터의 역할을 한다. 크게 4가지의 속성이 있으며 간단하게 정리해보자면 다음과 같다.
+
+#### state
+Vue의 **data** 개념에 해당 한다. React의 state와도 유사한 개념이다.
+
+#### mutations
+Vue의 **methods** 개념에 해당 한다. state를 **동기적으로 변형**할때 쓰인다.
+
+#### actions
+비동기적인 처리를 할때 쓰인다. 예를들면 서버에서 데이터를 받아와야 할때, axios로 데이터를 요청하고 받아온 데이터를 mutations에 넘겨주어 state에 데이터를 부여하는 방식으로 쓰인다.
+
+#### getters
+Vue의 **computed** 개념에 해당 한다. state 값을 계산하여 반환할 때 쓰인다.
+
+### Vuex store 구성 듀토리얼 (20200612)
+
+Nuxt환경에서의 Vuex
+
+우선 본격적인 작업 이전에 `pages/index.vue` 에서 rest api로 Wordpress의 homepage 데이터를 비동기호출해보는 코드를 작성할 것이다. 대략적인 순서도를 정리해보자면 다음과 같다.
+
+* index.vue 가 렌더되기 전에 서버에 데이터를 요청 *- Components, Pages 에서 요청*
+* 요청한 데이터를 비동기로 수신 *- Vuex Actions*
+* 요청한 데이터를 state에 setState *- Vuex Mutations*
+* index.vue 에서 state값을 렌더
+
+#### 1. index.vue 가 렌더되기 전에 서버에 데이터를 요청
+
+Vue 라이프사이클 훅으로 서버에 데이터를 요청한다. Nuxt에서 제공하는 `fetch(context)` 가 적합 할 듯 하나 [공식문서](https://ko.nuxtjs.org/api/pages-fetch)를 찾아보니 deprecated될 훅이며 공식문서의 안내대로 대신 `middleware(context)` 를 사용하도록 한다.
+
+``` javascript 
+//index.vue
+
+// 비동기로 데이터를 호출하는 훅
+middleware({ store }) {
+  // dispatch 로 store/pages.js/RequestPageData 를 실행한다.
+  store.dispatch('pages/RequestPageData', {
+    // 어떤 페이지 데이터를 불러올지 인자로 넘겨주었다. 
+    slug: 'home',
+  })
+}
+```
+
+#### 2. 요청한 데이터를 비동기로 수신
+
+Vuex store/pages.js에 다음과 같은 actions를 작성한다. nuxt 보일러플레이트 구성때 인스톨한 axios를 사용한다.
+
+``` javascript
+// store/pages.js
+export const actions = {
+  RequestPageData({ commit }, payload) {
+    // axios로 블로그 사이트에 데이터 요청
+    this.$axios.get(`https://wireframe.kr/wp-json/wp/v2/pages?slug=${payload.slug}`)
+      .then((res) => {
+        // 요청이 이행되면 Mutations : RequestPageData 에 data인자를 넘겨준다.
+        commit('RequestPageData', {
+          data: res.data
+        });
+      })
+      .catch((err) => {
+        console.error(err);
+      });
+  }
+}
+
+```
+
+#### 3. 요청한 데이터를 state에 setState
+
+state를 다음과 같이 정의하였다. 이례적으로 REST API로 호출된 rendered 데이터가 비동기적으로 주어지기때문에 초기값을 선언해주었다.
+
+``` javascript 
+// store/pages.js
+export const state = () => ({
+  // pageData는 객체이다.
+  pageData: {
+    title: {
+      // rendered를 빈값으로 선언하여 오류를 방지
+      rendered: ''
+    },
+    content: {
+      rendered: ''
+    },
+    excerpt: {
+      rendered: ''
+    }
+  },
+})
+```
+
+동기적으로 데이터를 state에 부여하기위해 mutations를 사용한다.
+
+``` javascript
+// store/pages.js
+export const mutations = {
+  RequestPageData (state, payload) {
+    // actions에서 넘겨준 데이터를 state에 부여
+    state.pageData = payload.data[0]
+  }
+}
+
+```
+
+#### 4. 요청한 데이터를 state에 setState
+
+state.pageData를 index.vue에서 computed로 가져와 사용한다.
+
+``` javascript
+//index.vue
+computed: {
+  pageData() {
+    return this.$store.state.pages.pageData;
+  },
+},
+```
