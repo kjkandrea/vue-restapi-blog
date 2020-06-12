@@ -379,4 +379,8 @@ store/
 --| posts.js
 ```
 
-store에서 각 포스트, 페이지들의 싱글 콘텐츠를 불러오도록 하였다.
+store에서 각 포스트, 페이지들의 싱글 콘텐츠를 Wordpress REST API로 불러오도록 하였다.
+
+추가로 **서버단에 요청을 최소화 하도록** [vuex-persistedstate](https://www.npmjs.com/package/vuex-persistedstate) 플러그인을 도입하였다.
+새로고침을 하거나, 다른 페이지를 경유하여 같은 페이지&포스트를 연속으로 방문할때에는 서버에 요청하지않고 state를 그대로 유지하도록 하였다.
+로컬 스토리지(Local Storage)에 가장 최근 경유한 페이지&포스트에 대한 데이터가 저장된다.

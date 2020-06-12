@@ -1,4 +1,5 @@
 export const state = () => ({
+  slug: '',
   postData: {
     title: {
       rendered: ''
@@ -13,6 +14,9 @@ export const state = () => ({
 })
 
 export const mutations = {
+  memorizeSlug (state, payload) {
+    state.slug = payload
+  },
   requestPostData (state, payload) {
     state.postData = payload
   }
@@ -23,6 +27,7 @@ export const actions = {
     if ( payload === state.slug ) return;
     try {
       let res = await this.$axios.get(`/posts?slug=${payload}`)
+      commit('memorizeSlug', payload);
       commit('requestPostData', res.data[0]);
     } catch(err) {
         console.log(err)
