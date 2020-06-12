@@ -1,5 +1,5 @@
 export const state = () => ({
-  pageData: {
+  postData: {
     title: {
       rendered: ''
     },
@@ -13,17 +13,17 @@ export const state = () => ({
 })
 
 export const mutations = {
-  requestPageData (state, payload) {
-    state.pageData = payload
+  requestPostData (state, payload) {
+    state.postData = payload
   }
 }
 
 export const actions = {
-  async requestPageData({ state, commit }, payload) {
+  async requestPostData({ state, commit }, payload) {
     if ( payload === state.slug ) return;
     try {
-      let res = await this.$axios.get(`/pages?slug=${payload}`)
-      commit('requestPageData', res.data[0]);
+      let res = await this.$axios.get(`/posts?slug=${payload}`)
+      commit('requestPostData', res.data[0]);
     } catch(err) {
         console.log(err)
     }

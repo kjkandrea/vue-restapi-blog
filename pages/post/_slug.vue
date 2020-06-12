@@ -1,7 +1,10 @@
 <template>
   <div>
-    <v-container v-if="post">
-      <em>{{post}} slug</em> 에 대한 Page 입니다.
+    <v-container v-if="postData">
+      <h2 v-html="postData.title.rendered"></h2>
+      <div v-html="postData.content.rendered">
+
+      </div>
     </v-container>
     <div v-else>
       해당 Post가 존재하지 않습니다.
@@ -12,9 +15,12 @@
 <script>
   export default {
     computed: {
-      post() {
-        return this.$route.params.slug
+      postData() {
+        return this.$store.state.posts.postData;
       },
     },
+    middleware({ store, params }) {
+      store.dispatch('posts/requestPostData', params.slug)
+    }
   };
 </script>
