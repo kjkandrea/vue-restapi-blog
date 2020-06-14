@@ -33,9 +33,7 @@ export default {
     },
   },
   middleware({ store }) {
-    store.dispatch('pages/RequestPageData', {
-      slug: 'home',
-    })
+    store.dispatch('pages/requestPageData', 'home')
   }
 }
 </script>

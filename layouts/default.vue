@@ -6,7 +6,6 @@
       v-model="drawer"
       :clipped="$vuetify.breakpoint.lgAndUp"
       app
-      right
     >
       <v-list dense>
         <template v-for="item in items">
@@ -85,12 +84,14 @@
       color="blue darken-3"
       dark
     >
+      <v-app-bar-nav-icon @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
       <v-toolbar-title
-        style="width: 200px"
+        style="width: 204px"
         class="ml-0 pl-4"
       >
         <span>Wireframe</span>
       </v-toolbar-title>
+      <!-- <v-spacer /> -->
       <v-text-field
         flat
         solo-inverted
@@ -98,9 +99,8 @@
         prepend-inner-icon="mdi-magnify"
         label="Search"
         class="hidden-sm-and-down"
+        style="max-width: 585px"
       ></v-text-field>
-      <v-spacer></v-spacer>
-      <v-app-bar-nav-icon @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
     </v-app-bar>
     <!--// header bar -->
 
@@ -109,11 +109,9 @@
       <v-container
         class="fill-height"
         fluid
+        align-start
       >
-        <v-row
-          align="center"
-          justify="center"
-        >
+        <v-row>
           <nuxt />
         </v-row>
       </v-container>
