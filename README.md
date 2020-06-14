@@ -363,7 +363,7 @@ computed: {
 },
 ```
 
-### Post, Page 데이터 구현
+### Post, Page 데이터 구현 (20200612)
 
 시뮬레이션 해본 위의 코드를 참고하여 포스트 싱글페이지, 페이지 싱글페이지에 데이터를 부여할것이다. 다음 디렉토리 구조내의 파일들을 추가하여 작업한다.
 
@@ -379,8 +379,36 @@ store/
 --| posts.js
 ```
 
-store에서 각 포스트, 페이지들의 싱글 콘텐츠를 Wordpress REST API로 불러오도록 하였다.
+store에서 각 포스트, 페이지들의 싱글 콘텐츠를 Wordpress REST API로 불러오도록 하였다. 
 
 추가로 **서버단에 요청을 최소화 하도록** [vuex-persistedstate](https://www.npmjs.com/package/vuex-persistedstate) 플러그인을 도입하였다.
 새로고침을 하거나, 다른 페이지를 경유하여 같은 페이지&포스트를 연속으로 방문할때에는 서버에 요청하지않고 state를 그대로 유지하도록 하였다.
 로컬 스토리지(Local Storage)에 가장 최근 경유한 페이지&포스트에 대한 데이터가 저장된다.
+
+### Category, Tag 에 따른 포스트 목록 구현 (20200614)
+
+다음 url로 접속하였을때 각 텍소노미가 아카이빙 되도록 한다.
+
+```
+`https://wireframer.kr/category/${slug_name}` // Category Archiving
+`https://wireframer.kr/tag/${slug_name}` // Tag Archiving
+```
+
+store에서 각 텍소노미(Category, Tag)들의 목록을 불러오도록 하였다. 두 텍소노미가 공통성을 지니고있어 store는 따로 분리하지않고 `store/posts.js` 에 통합하였다. 데이터,메소드 명칭도 **Taxonomy** 로 명명하여 통합시켰다.
+`vuex-persistedstate`로 캐싱을 하기위해 여러 상태를 state에 기록해두었다. `pageIndex, taxonomyId, lastFetchTexonomy, taxonomiesLastFetchDates` 가 이에 해당하며 이 때문에 state가 상당히 복잡해졌다. 추후에 Vuex store에 대해 철저히 테스트하여 버그가 없는지 확인하여야한다.
+
+구현 도중 똑같은 쿼리를 두 번 호출하는 실수를 개발자 도구 Network 탭에서 발견하여 바로 수정하였다. get 요청을 할때엔 Network 탭을 항상확인하자.
+
+Facebook에서 사용하는 포스팅 시간 표시 기능이 마음에 들어 벤치마킹하여 구현하였다. 작성한지 1분 미만이면 '방금', 어제면 '어제 몇시 경' 이런식으로 뜨는 기능이다. 하잘것없는 기능이나 Date를 직접적으로 다뤄본 적이 없어 많은 시행착오를 거쳤다. [momentjs](https://momentjs.com/)를 사용하고자 하였으나 기능에 비해 지나치게 무거워 대신 [dayjs](https://day.js.org/) 라이브러리를 사용하였다. 이 라이브러리의 슬로건은 **momentjs와 유사한 사용법을 지닌 경량화된 미니멀리즘 라이브러리** 이다. 구현하며 시간개념을 프론트엔드에서 어떻게 다루어야할 지 간접적으로 많이 배우게 되었다. 
+현재는 `TimeStamp`란 명칭으로 컴포넌트화 시켰으나, 초기에는 글로벌 함수를 추가하여 이를 구현하고자 하였다. Nuxt의 plugin 디렉토리를 활용하면 될 듯 한데 나중에 읽어 볼 글들을 기록해둔다.
+
+* [Nuxt 도큐먼트 : 플러그인](https://ko.nuxtjs.org/guide/plugins/)
+* [[Nuxtjs] plugin 이용하여 global methods 만들기](https://medium.com/@Dongmin_Jang/vue-js-global-methods-%EB%A7%8C%EB%93%A4%EA%B8%B0-8578365634e2)
+
+
+## 내일 할 일
+
+* vue 스타일 가이드 다시 한번 정독 [바로가기](https://kr.vuejs.org/v2/style-guide/index.html#%EC%9A%B0%EC%84%A0%EC%88%9C%EC%9C%84-A-%ED%95%84%EC%88%98)
+* 타임스탬프 관련하여 코드 읽어보고 가능하면 포스팅하기
+* 네비게이션 메뉴 연동
+

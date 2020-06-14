@@ -12,6 +12,7 @@
   },
   "dependencies": {
     "@nuxtjs/axios": "^5.3.6",
+    "dayjs": "^1.8.28",
     "nuxt": "^2.0.0",
     "vuex-persistedstate": "^3.0.1"
   },
