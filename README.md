@@ -406,9 +406,52 @@ Facebook에서 사용하는 포스팅 시간 표시 기능이 마음에 들어 �
 * [[Nuxtjs] plugin 이용하여 global methods 만들기](https://medium.com/@Dongmin_Jang/vue-js-global-methods-%EB%A7%8C%EB%93%A4%EA%B8%B0-8578365634e2)
 
 
-## 내일 할 일
+### 메뉴 구현 (20200615)
 
-* vue 스타일 가이드 다시 한번 정독 [바로가기](https://kr.vuejs.org/v2/style-guide/index.html#%EC%9A%B0%EC%84%A0%EC%88%9C%EC%9C%84-A-%ED%95%84%EC%88%98)
-* 타임스탬프 관련하여 코드 읽어보고 가능하면 포스팅하기
-* 네비게이션 메뉴 연동
+메뉴를 구현하였다. 특이사항이 몇가지 있었다. 
 
+#### Component 단위에서는 asyncDate, middleware 라이프 사이클 훅을 사용할 수 없다.
+
+이는 nuxt [컴포넌트에서의 비동기 데이터](https://ko.nuxtjs.org/faq/async-data-components/) 에 설명되어 있다. 나는 `mounted` 훅을 사용하였다.
+
+#### computed setter
+
+네비게이션 토글을 제어하고자 전역 store에서 navigationDrawer 란 state를 생성하였다. 이 state를 다음과 같이 computed로 받아 `v-model`로 네비게이션에 연결하여 처리하고자 하였으나 문제가 발생하였다.
+
+> [Vue warn]: Computed property "name" was assigned to but it has no setter.
+
+``` vue
+<template>
+  <v-navigation-drawer
+    v-model="drawer"
+  />
+  ...
+</template>
+
+<script>
+export default {
+  computed: {
+    drawer() {
+      return this.$store.state.navigationDrawer
+    }
+  }
+}
+</script>
+```
+
+**`computed` 를 `v-model`로 바인딩하려면, setter를 넣어주어야 한다.**
+
+setter에서 `this.$store.state.navigationDrawer` 에 직접 접근해서 `this.$store.state.navigationDrawer = state` 식으로 값을 바꿔버리란 얼토당토하지도 않은 해결법을 웹에서 발견하였다.. 이렇게하면 Vuex가 비명을 지른다. 무시하고 다음과 같이 응용하여 오류를 잡았다.
+
+``` javascript
+drawer: {
+  get() {
+    return this.$store.state.navigationDrawer
+  },
+  set(state) {
+    if (state !== this.$store.state.navigationDrawer) {
+      this.$store.commit('setStateToggleDrawer')
+    }
+  }
+}
+```
