@@ -18,18 +18,19 @@ export default {
   },
   methods: {
     timeLine(time){
-      const past = dayjs(this.time);
+      const past = dayjs(time);
       const now = dayjs();
 
       if (past.isSame(now, 'year')) { // 작성일과 현재년이 일치
         if (past > now.add(-1, 'month')) { // 작성일로부터 1개월 이하
           if (past.isSame(now, 'day')) { // 오늘
             if (past > now.add(-1, 'hour')) { // 작성일로부터 1시간 이하
+              if (past > now.add(-1, 'minute')) { // 작성일로부터 1분 이하
+                return '방금'
+              }
               return now.to(past)
             }
-            if (past > now.add(-1, 'minute')) { // 작성일로부터 1분 이하
-              return '방금'
-            }
+            
             return now.to(past)
           }
           if(past.isYesterday()) { // 어제
