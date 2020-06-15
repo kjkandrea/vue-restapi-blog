@@ -61,7 +61,7 @@ export const actions = {
     if(lastDate === now && state.lastFetchTexonomy === payload) return;
     
     try {
-      let res = await this.$axios.get(`/${payload}?_fields=id,count,name,slug`)
+      let res = await this.$axios.get(`/v2/${payload}?_fields=id,count,name,slug`)
       commit('setStateTaxonomiesData', res.data);
       commit('memorizeLastFetchTexonomy', payload);
       commit('memorizeLastFetchDates');
@@ -79,7 +79,7 @@ export const actions = {
     if ( _taxonomyObj.id === state.taxonomyId && payload.page === state.pageIndex) return;
 
     try {
-      let res = await this.$axios.get(`/posts?_fields=title,slug,date,excerpt&${payload.type}=${_taxonomyObj.id}&page=${payload.page}`)
+      let res = await this.$axios.get(`/v2/posts?_fields=title,slug,date,excerpt&${payload.type}=${_taxonomyObj.id}&page=${payload.page}`)
       commit('memorizePageIndex', payload.page);
       commit('memorizeTaxonomyId', _taxonomyObj.id);
       commit('setStateTaxonomyPostsData', res.data);
@@ -90,7 +90,7 @@ export const actions = {
   async requestPostData({ state, commit }, payload) {
     if ( payload === state.slug ) return;
     try {
-      let res = await this.$axios.get(`/posts?slug=${payload}`)
+      let res = await this.$axios.get(`/v2/posts?slug=${payload}`)
       commit('memorizeSlug', payload);
       commit('setStatePostData', res.data[0]);
     } catch(err) {
