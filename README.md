@@ -85,7 +85,7 @@ Generating 옵션은 다음과 같이 선택하였다.
 * Choose custom server framework : **안쓸래요!**
 * Choose Nuxt.js modules : **Axios**
 * Choose linting tools : **안쓸래요!**
-* Choose rendering mode : **Single Page App**
+* Choose rendering mode : **SSR**
 * Choose development tools : **jsconfig.json (Recommended for VS Code)**
 
 패키지 매니저는 익숙한 npm을 선택. UI framework는 Vuetify를 사용하기로 하였다. 모든 데이터 요청은 axios로 처리하기위해 Axios를 설치하였다. lint는 개인작업이여서 따로 구성하지 않았다. 
@@ -465,7 +465,66 @@ drawer: {
 Wordpress REST API에서 제공하는 search만을 이용하여 간단히 구현하였다.
 
 
+## 스타일링 (20200616)
 
-- middleware 리턴에 대해 더 조사할것
-- plugin과 vuex-persistedstate의 SSR환경 사용에 대해 더 조사할것
-- https://ko.nuxtjs.org/api/configuration-loading/ 로딩 커스텀
+`assets/scss` 디렉토리를 구성하여 css를 따로 제어하도록 하였다. 
+다음 명령어로 필요한 플러그인들을 인스톨한다. yarn으로 인스톨하였다.
+
+```
+yarn add -D node-sass sass-loader @nuxtjs/style-resources
+```
+
+그 후, nuxt.config.js 에서 다음과같이 styles.scss 를 로드하면 된다.
+
+```
+// Global CSS
+css: [
+  "@/assets/scss/main.scss",
+],
+```
+
+Vuetity에 정의된 스타일들을 커스텀할때에는 `assets/variables.scss` 를 사용한다. [공식문서 : sass variables](https://vuetifyjs.com/ko/customization/sass-variables/)
+
+Nuxt 환경에서는 다음과 같이 `nuxt.config.js`에서 variables.scss를 활성화해주어야 작동한다.
+
+```
+vuetify: {
+  customVariables: ['~/assets/scss/variables.scss'],
+  treeShake: true,
+  options: {
+    customProperties: true
+  },
+},
+```
+
+그 후 공식문서를 참고하며 커스텀해주면 된다. `$font-size-root, $body-font-family` 등의 Vuetify에서 정해진 변수 명칭을 사용하여 지정한다.
+
+
+## nuxt plugin 디렉토리를 활용하여 javascript Plugin 적용
+
+캐로셀, 데이트 픽커 등 외부 라이브러리를 쓰고자 할 때 `nuxt plugin`을 사용하면 외부 패키지를 손쉽게 불러올 수 있다. 
+
+### prizmjs plugin
+Wordpress Gutenberg로 작성된 `<code />` 태그 를 하이라이트 표시 해 줄 플러그인이 필요하여 [prizm](https://prismjs.com/index.html) 을 적용하고자 하였다.
+해당 플러그인은 뷰모델과 관계없이 document가 클라이언트단에 렌더링 다음에 실행되는 플러그인이다. 초기에는 npm으로 인스톨하여 package 종속성을 지니게 하고자 하였으나 옵션을 제어하기가 불편하여 다른 방법을 선택하였다. 구식적인 방식으로 공식 홈페이지에서 옵션을 취사선택하여 js파일과 css파일을 내려받아 적용하는것이다.
+
+`assets/js `디렉토리에 `prism.js` 파일을 넣어주었고, css파일은 `scss`에 포함시켜 `main.scss` 에 연결하여 같이 빌드되도록하였다.
+그 다음 `nuxt plugin`으로 프로젝트와 다음과 같이 연결시켰다. 
+
+``` javascript
+//plugins/prism.js
+import Prism from '~/assets/js/prism';
+
+if (process.client) {
+    Prism.highlightAll(); 
+}
+```
+
+``` 
+//nuxt.config.js
+plugins: [
+  { src: '~/plugins/prism.js' },
+],
+```
+
+이처럼 간단하게 외부 javascript 플러그인을 적용할 수도 있으나 되도록 npm을 통해 인스톨하여 package로 관리되게 하는것이 바람직하여 보인다. 취약점이 발견되거나 업데이트가 필요할 때 이처럼 적용한 플러그인은 취약점 발생을 인지하기도 쉽지 않으며, 업데이트 등 사후 관리 또한 어려울 것이다.
