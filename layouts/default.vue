@@ -17,18 +17,10 @@
         style="width: 204px"
         class="ml-0 pl-4"
       >
-        <span>Wireframe</span>
+        <nuxt-link to="/"><span style="color:white">Wireframe</span></nuxt-link>
       </v-toolbar-title>
       <!-- <v-spacer /> -->
-      <v-text-field
-        flat
-        solo-inverted
-        hide-details
-        prepend-inner-icon="mdi-magnify"
-        label="Search"
-        class="hidden-sm-and-down"
-        style="max-width: 585px"
-      ></v-text-field>
+      <the-search-form />
     </v-app-bar>
     <!--// header bar -->
 
@@ -52,10 +44,12 @@
 
 <script>
 
+import TheSearchForm from '~/components/TheSearchForm'
 import TheNavigationMenu from '~/components/TheNavigationMenu'
 
 export default {
   components: {
+    TheSearchForm,
     TheNavigationMenu
   },
   props: {
