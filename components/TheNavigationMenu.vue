@@ -17,11 +17,11 @@
               <nuxt-link
                 v-if="item.url !== '#'"
                 :to="navigationAnchor(item)" 
-                class="onedepth-link" 
+                class="nav-link" 
                 :title="item.title"
               />
               <v-list-item-title>
-                {{ item.title }}
+                <span class="nav-title">{{ item.title }}</span>
               </v-list-item-title>
             </v-list-item-content>
           </template>
@@ -38,11 +38,11 @@
               <nuxt-link
                 v-if="child.url !== '#'"
                 :to="navigationAnchor(child)" 
-                class="onedepth-link" 
+                class="nav-link" 
                 :title="child.title"
               />
               <v-list-item-title>
-                {{ child.title }}
+                <span class="nav-title">{{ child.title }}</span>
               </v-list-item-title>
             </v-list-item-content>
           </v-list-item>
@@ -86,7 +86,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.onedepth-link{
+.nav-link{
   position: absolute;
   top: 0;
   left: 0;
@@ -94,4 +94,13 @@ export default {
   bottom: 0;
   margin: 0;
 }
+
+.nav-title {
+  font-size: 16px;
+  font-family: 'Roboto', sans-serif;
+  font-weight: 500;
+  text-transform: capitalize;
+  
+}
+
 </style>

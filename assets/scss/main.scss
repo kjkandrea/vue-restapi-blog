@@ -1,0 +1,10 @@
+:root {
+  @import './layout/content';
+  @import './layout/typography';
+  @import './layout/gutenberg';
+
+  @import './partial/header';
+
+  @import './plugin/prism';
+}
+

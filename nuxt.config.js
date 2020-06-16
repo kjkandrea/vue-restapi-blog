@@ -17,7 +17,11 @@ export default {
       { hid: 'description', name: 'description', content: process.env.npm_package_description || '' }
     ],
     link: [
-      { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }
+      { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
+      {
+        rel: 'stylesheet',
+        href:'https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&family=Roboto:wght@500;700&display=swap'
+      },
     ]
   },
   /*
@@ -28,6 +32,7 @@ export default {
   ** Global CSS
   */
   css: [
+    "@/assets/scss/main.scss",
   ],
   /*
   ** Plugins to load before mounting the App
@@ -60,20 +65,13 @@ export default {
   ** https://github.com/nuxt-community/vuetify-module
   */
   vuetify: {
-    customVariables: ['~/assets/variables.scss'],
+    customVariables: ['~/assets/scss/variables.scss'],
+    treeShake: true,
+    options: {
+      customProperties: true
+    },
     theme: {
       light: true,
-      themes: {
-        dark: {
-          primary: colors.blue.darken2,
-          accent: colors.grey.darken3,
-          secondary: colors.amber.darken3,
-          info: colors.teal.lighten1,
-          warning: colors.amber.base,
-          error: colors.deepOrange.accent4,
-          success: colors.green.accent3
-        }
-      }
     }
   },
   /*
