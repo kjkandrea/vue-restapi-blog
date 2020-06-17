@@ -23,4 +23,7 @@
       store.dispatch('posts/requestPostData', params.slug)
     }
   };
+  mounted () {
+    this.$InjectedPrism()
+  }
 </script>

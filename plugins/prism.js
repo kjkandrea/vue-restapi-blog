@@ -1,5 +1,8 @@
 import Prism from '~/assets/js/prism';
+import Vue from 'vue'
 
-if (process.client) {
-    Prism.highlightAll(); 
+Vue.prototype.$InjectedPrism = () => {
+    if (process.client) {
+        Prism.highlightAll(); 
+    }
 }
