@@ -38,6 +38,7 @@ export default {
   ** Plugins to load before mounting the App
   */
   plugins: [
+    { src: '~/plugins/tocbot.js' },
     { src: '~/plugins/prism.js' },
     { src: '~/plugins/vuex-persistedstate.js', ssr: false },
   ],
