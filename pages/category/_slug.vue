@@ -1,26 +1,40 @@
 <template>
-  <div>
-    <v-container v-if="pages" style="max-width:760px">
-      <em>{{taxonomy}}</em> 에 대한 Post 목록 입니다.
-      <ul>
-        <li v-for="item in taxonomyPostsData" :key="item.id">
-          <nuxt-link :to="{ name: 'post-slug',  params: { slug: item.slug } }">
-            <h4 v-html="item.title.rendered" />
-            <time-stamp :time=item.date />
-            <p v-html="item.excerpt.rendered" />
-          </nuxt-link>
-        </li>
-      </ul>
+  <v-layout
+    column
+    align-center
+  >
+    <v-flex
+      xs12
+      sm8
+      md6
+    >
+      <div class="content-wrap">
+        <v-container v-if="pages" style="max-width:760px">
+          <h1 class="content-lists-title"><em>"{{taxonomy}}"</em> 에 대한 Post 목록 입니다.</h1>
+          <ul class="content-lists">
+            <li v-for="item in taxonomyPostsData" :key="item.id">
+              <nuxt-link :to="{ name: 'post-slug',  params: { slug: item.slug } }">
+                <header>
+                  <h2 v-html="item.title.rendered" />
+                  <time-stamp :time=item.date />
+                </header>
+                <div class="excerpt" v-html="item.excerpt.rendered" />
+              </nuxt-link>
+              <hr>
+            </li>
+          </ul>
 
-      <v-pagination
-        v-model="page"
-        :length="pages"
-      />
-    </v-container>
-    <div v-else>
-      해당 Taxonomy가 존재하지 않습니다.
-    </div>
-  </div>
+          <v-pagination
+            v-model="page"
+            :length="pages"
+          />
+        </v-container>
+        <div v-else>
+          해당 Taxonomy가 존재하지 않습니다.
+        </div>
+      </div>
+    </v-flex>
+  </v-layout>
 </template>
 
 <script>
@@ -71,7 +85,7 @@ export default {
     let page = 1
     if(query.page) page = query.page
     await store.dispatch('posts/requestTaxonomiesData', 'categories')
-    store.dispatch('posts/requestTaxonomyPostsData', {
+    return store.dispatch('posts/requestTaxonomyPostsData', {
       type: 'categories',
       taxonomy : params.slug,
       page : page
@@ -84,7 +98,7 @@ export default {
   },
   methods: {
     fetchData() {
-      this.$store.dispatch('posts/requestTaxonomyPostsData', {
+      return this.$store.dispatch('posts/requestTaxonomyPostsData', {
         type: 'categories',
         taxonomy : this.taxonomy,
         page : this.page

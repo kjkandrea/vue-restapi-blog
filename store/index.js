@@ -1,9 +1,3 @@
-// import createPersistedState from 'vuex-persistedstate'
-
-// export const plugins = [
-//   createPersistedState()
-// ]
-
 export const state = () => ({
   navigationDrawer: null,
   navigationData: [],
@@ -20,7 +14,6 @@ export const mutations = {
 
 export const actions = {
   async requestNavigationData({ commit }, payload) {
-    console.log('requestNavigationData')
     try {
       let res = await this.$axios.get(`/menus/v1/menus/${payload}`)
       commit('setStateNavigationData', res.data.items);

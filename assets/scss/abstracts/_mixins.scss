@@ -1,0 +1,118 @@
+/*--------------------------------------------------------------
+# mixin
+--------------------------------------------------------------*/
+@mixin container {
+  max-width: 1130px;
+  margin: 0 auto;
+}
+
+@mixin clear {
+  &:after {
+    content: "";
+    display: block;
+    clear: both;
+  }
+}
+
+@mixin bg($url, $size) {
+  background-image: url($url);
+  background-position: center;
+  background-size: $size;
+  background-repeat: no-repeat;
+}
+
+@mixin position($x, $y, $z) {
+  position: absolute;
+  left: $x;
+  top: $y;
+  z-index: $z;
+
+  @if $x==50% and $y==50% {
+    transform: translate(-50%, -50%);
+  }
+
+  @else if $x==50% {
+    transform: translateX(-50%);
+  }
+
+  @else if $y==50% {
+    transform: translateY(-50%);
+  }
+}
+
+@mixin positionfit {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+}
+
+@mixin cascade {
+  @include vendor('animation', 'cascade 0.5s 1');
+  animation-timing-function: cubic-bezier(0, 0.59, 0.24, 1.33);
+  animation-fill-mode: forwards;
+}
+
+@keyframes cascade {
+  from {
+    transform: scale(0.8) translateY(100px);
+    opacity: 0;
+  }
+
+  to {
+    transform: scale(1) translateY(0px);
+    opacity: 1;
+  }
+}
+
+@mixin textClamp($lines: 1, $line-height: false) {
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: $lines;
+  text-overflow: ellipsis;
+
+  @if $line-height {
+    max-height: $line-height * $lines;
+  }
+}
+
+@mixin placeholder {
+  &::-webkit-input-placeholder {
+    @content
+  }
+
+  &:-moz-placeholder {
+    @content
+  }
+
+  &::-moz-placeholder {
+    @content
+  }
+
+  &:-ms-input-placeholder {
+    @content
+  }
+}
+
+;
+
+@mixin tableBreak {
+  display: block;
+
+  tbody {
+    display: block;
+
+    tr {
+      display: block;
+
+      td,
+      th {
+        display: block;
+        padding-left: 0;
+        padding-right: 0;
+      }
+    }
+  }
+}

@@ -17,7 +17,7 @@
         style="width: 204px"
         class="ml-0 pl-4"
       >
-        <nuxt-link to="/"><span style="color:white">Wireframe</span></nuxt-link>
+        <nuxt-link to="/"><span class="typography-logo">Wireframe</span></nuxt-link>
       </v-toolbar-title>
       <!-- <v-spacer /> -->
       <the-search-form />
@@ -52,32 +52,6 @@ export default {
     TheSearchForm,
     TheNavigationMenu
   },
-  props: {
-    source: String,
-  },
-  data: () => ({
-    items: [
-      { icon: 'mdi-home', text: 'Home' },
-      { icon: 'mdi-account', text: 'About' },
-      {
-        icon: 'mdi-chevron-up',
-        'icon-alt': 'mdi-chevron-down',
-        text: 'Categories',
-        model: false,
-        children: [
-          { text: 'TIL (Today I Learned)' },
-          { text: 'javascript' },
-          { text: 'Vuejs' },
-          { text: 'React' },
-          { text: 'nodejs' },
-          { text: 'git' },
-          { text: 'webpack' },
-          { text: 'MySQL' },
-          { text: 'etc' }
-        ],
-      }
-    ],
-  }),
   methods: {
     onClickNavIcon() {
       this.$store.commit('setStateToggleDrawer')

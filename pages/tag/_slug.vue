@@ -28,11 +28,6 @@
 import TimeStamp from '~/components/TimeStamp'
 
 export default {
-  asyncData({query}) { 
-    if(query.page){
-      //console.log(query.page)
-    }
-  },
   components: {
     TimeStamp
   },

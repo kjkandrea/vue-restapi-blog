@@ -24,7 +24,7 @@ export const mutations = {
 
 export const actions = {
   async requestPageData({ state, commit }, payload) {
-    if ( payload === state.slug ) return;
+    //if ( payload === state.slug ) return;
     try {
       let res = await this.$axios.get(`/v2/pages?slug=${payload}`)
       commit('memorizeSlug', payload);
