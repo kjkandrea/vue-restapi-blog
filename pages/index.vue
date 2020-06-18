@@ -1,16 +1,5 @@
 <template>
-  <v-layout
-    column
-    align-center
-  >
-    <v-flex
-      xs12
-      sm8
-      md6
-    >
-      <div class="content-wrap" v-html="pageData.content.rendered" />
-    </v-flex>
-  </v-layout>
+  <div class="content-wrap" v-html="pageData.content.rendered" />
 </template>
 
 <script>

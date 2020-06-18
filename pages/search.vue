@@ -1,13 +1,13 @@
 <template>
-  <div>
+  <div class="content-wrap">
     <client-only placeholder="Loading...">
       <template v-if="keyword">
-        <h1>'{{keyword}}' 에 대한 검색 결과입니다.</h1>
-          <ul v-if="resultPostsData[0]">
+        <h1 class="content-lists-title"><em>{{keyword}}</em> 에 대한 검색 결과입니다.</h1>
+          <ul  class="content-lists" v-if="resultPostsData[0]">
             <li v-for="item in resultPostsData" :key="item.id">
               <nuxt-link :to="{ name: 'post-slug',  params: { slug: item.slug } }">
-                <h4 v-html="highlight(item.title.rendered)" />
-                <p v-html="highlight(item.excerpt.rendered)" />
+                <h2 v-html="highlight(item.title.rendered)" />
+                <div class="excerpt" v-html="highlight(item.excerpt.rendered)" />
               </nuxt-link>
             </li>
           </ul>
@@ -52,6 +52,7 @@ export default {
 
 <style>
 .highlightText {
-    background: yellow;
+  font-style: normal;
+  color: #1976d2;
 }
 </style>

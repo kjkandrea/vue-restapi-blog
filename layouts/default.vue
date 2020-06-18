@@ -21,6 +21,14 @@
       </v-toolbar-title>
       <!-- <v-spacer /> -->
       <the-search-form />
+      <v-spacer />
+      <v-app-bar-nav-icon
+        href="https://github.com/kjkandrea/vue-wordpress-blog/issues"
+        target="_blank"
+        style="text-decoration:none"
+      > 
+        <v-icon>mdi mdi-bug</v-icon>
+      </v-app-bar-nav-icon>
     </v-app-bar>
     <!--// header bar -->
 
@@ -34,7 +42,18 @@
         align-start
       >
         <v-row>
-          <nuxt />
+          <v-layout
+            column
+            align-center
+          >
+            <v-flex
+              xs12
+              sm8
+              md6
+            >
+              <nuxt />
+            </v-flex>
+          </v-layout>
         </v-row>
       </v-container>
     </v-content>

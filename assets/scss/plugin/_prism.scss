@@ -8,7 +8,7 @@ https://prismjs.com/download.html#themes=prism-tomorrow&languages=markup+css+cli
 
  code[class*="language-"],
  pre[class*="language-"] {
-   color: #ccc;
+   color: #fff;
    background: none;
    font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
    font-size: 14px;
@@ -32,14 +32,16 @@ https://prismjs.com/download.html#themes=prism-tomorrow&languages=markup+css+cli
  
  /* Code blocks */
  pre[class*="language-"] {
-   padding: 1em;
+   padding: 1.5em;
+   border-radius: .4rem;
    margin: .5em 0;
    overflow: auto;
  }
  
  :not(pre) > code[class*="language-"],
  pre[class*="language-"] {
-   background: #2d2d2d;
+   background: #263238;
+   box-shadow: none;
  }
  
  /* Inline code */
@@ -47,6 +49,7 @@ https://prismjs.com/download.html#themes=prism-tomorrow&languages=markup+css+cli
    padding: .1em;
    border-radius: .3em;
    white-space: normal;
+   box-shadow: none;
  }
  
  .token.comment,
@@ -54,28 +57,31 @@ https://prismjs.com/download.html#themes=prism-tomorrow&languages=markup+css+cli
  .token.prolog,
  .token.doctype,
  .token.cdata {
-   color: #999;
+   color: #546e7a;
  }
  
  .token.punctuation {
-   color: #ccc;
+   color: #89ddff;
  }
  
  .token.tag,
- .token.attr-name,
  .token.namespace,
  .token.deleted {
-   color: #e2777a;
+   color: #ff5370;
+ }
+
+ .token.attr-name{
+   color: #c792ea;
  }
  
  .token.function-name {
-   color: #6196cc;
+   color: #FF5555;
  }
  
  .token.boolean,
  .token.number,
  .token.function {
-   color: #f08d49;
+   color: #82aaff;
  }
  
  .token.property,
@@ -90,7 +96,7 @@ https://prismjs.com/download.html#themes=prism-tomorrow&languages=markup+css+cli
  .token.atrule,
  .token.keyword,
  .token.builtin {
-   color: #cc99cd;
+   color: #89ddff;
  }
  
  .token.string,
@@ -98,7 +104,7 @@ https://prismjs.com/download.html#themes=prism-tomorrow&languages=markup+css+cli
  .token.attr-value,
  .token.regex,
  .token.variable {
-   color: #7ec699;
+   color: #c3e88d;
  }
  
  .token.operator,

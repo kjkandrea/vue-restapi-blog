@@ -1,0 +1,36 @@
+.profile {
+  padding: 32px 16px;
+  text-align:center;
+
+  .profile-anchor {
+    display: block;
+    max-width: 135px;
+    margin: 0 auto;
+    border-radius: 50rem;
+    border: 1px solid #e5e5e5;
+    img {
+      display: block;
+      margin: 0;
+      padding: 0;
+    }
+  }
+
+  h2 {
+    margin: 16px 0 4px 0;
+    font-size: 0.86rem;
+  }
+
+  .third-party-anchor {
+    a {
+      display: inline-block;
+      padding: 0 0.15rem;
+      font-size: 0.75rem;
+      color: #424242;
+      text-decoration: none;
+
+      .mdi {
+        font-size: 20px;
+      }
+    }
+  }
+}

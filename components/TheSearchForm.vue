@@ -10,7 +10,7 @@
       solo-inverted
       hide-details
       prepend-inner-icon="mdi-magnify"
-      label="사이트 내 포스트 검색"
+      label="포스트 검색하기"
       class="hidden-sm-and-down"
       style="max-width: 585px;"
     ></v-text-field>

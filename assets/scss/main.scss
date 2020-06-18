@@ -6,7 +6,10 @@
   @import './layout/content-lists';
   @import './layout/gutenberg';
 
+  @import './components/profile';
+
   @import './partial/header';
+  @import './partial/aside';
 
   @import './plugin/prism';
 }
