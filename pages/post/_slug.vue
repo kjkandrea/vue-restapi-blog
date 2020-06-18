@@ -23,6 +23,7 @@
       </div>
     </v-flex>
   </v-layout>
+      <Disqus />
 </template>
 
 <script>

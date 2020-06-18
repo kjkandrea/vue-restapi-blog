@@ -528,3 +528,17 @@ plugins: [
 ```
 
 이처럼 간단하게 외부 javascript 플러그인을 적용할 수도 있으나 되도록 npm을 통해 인스톨하여 package로 관리되게 하는것이 바람직하여 보인다. 취약점이 발견되거나 업데이트가 필요할 때 이처럼 적용한 플러그인은 취약점 발생을 인지하기도 쉽지 않으며, 업데이트 등 사후 관리 또한 어려울 것이다.
+
+[Vue 인스턴스에 주입하기](https://ko.nuxtjs.org/guide/plugins/#vue-%EC%9D%B8%EC%8A%A4%ED%84%B4%EC%8A%A4%EC%97%90-%EC%A3%BC%EC%9E%85%ED%95%98%EA%B8%B0) 를 통해 해당 기능을 `page/post/_slug.vue`에서만 실행하도록 하였다.
+
+
+### tocbot plugin
+
+[tocbot](https://tscanlin.github.io/tocbot/)은 콘텐츠내의 헤드라인 태그를 스캔하여 목차를 자동으로 만들어주는 플러그인이다. 간단히 적용하였다.
+
+
+### vue-disqus plugin
+
+코멘트 기능 삽입을 위해 Disqus를 도입하고자 하였다. [vue-disqus](https://ktquez.github.io/vue-disqus/) 을 통해 Disqus와 연동하였는데 내가 예상한것보다 훨씬 메끄럽게 연동이 가능했다. Disqus에서 shortname만 생성하여 이 정보를 토대로 Disqus를 연동하면 된다. [Nuxt.js 적용 방법](https://ktquez.github.io/vue-disqus/howto/nuxt.html)
+
+
