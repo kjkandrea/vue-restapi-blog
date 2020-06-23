@@ -118,6 +118,15 @@ export default {
   axios: {
     baseURL: process.env.BASE_URL || 'https://wireframe.kr/wp-json/wp'
   },
+  router: {
+    extendRoutes (routes, resolve) {
+      routes.push({
+        name: 'pageNotFound',
+        path: '*',
+        component: resolve(__dirname, './pages/404.vue')
+      })
+    }
+  },
   /*
    ** vuetify module configuration
    ** https://github.com/nuxt-community/vuetify-module
