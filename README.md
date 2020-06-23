@@ -14,7 +14,7 @@ Wordpress의 데이터베이스 구조, 백엔드를 활용하여 클라이언�
 * Nuxt 프레임워크에서 빌드는 어떻게 진행하여야 하는가?
 * 빌드 시 소스맵을 보이지 않는 등 구체적인 설정을 할 수 있는가?
 
-## 기능 정의 (20200611)
+## 기능 정의
 
 현재 Wordpress로 운영중인 wireframe 블로그에서 크게 벗어나지 않도록 정의하였다. 초보몽키 님의 지킬로 구성된 [초보몽키의 개발공부로그](wayhome25.github.io) 블로그를 많은 부분 참고하였다.
 
@@ -68,7 +68,7 @@ Wordpress의 데이터베이스 구조, 백엔드를 활용하여 클라이언�
 
 비교적 익숙한 Nuxt로 프론트엔드를 구축한다.
 
-### Nuxt 개발환경(보일러플레이트) 구성 (20200611)
+### Nuxt 개발환경(보일러플레이트) 구성
 
 [create-nuxt-app](https://ko.nuxtjs.org/guide/installation/) 을 사용한다.
 프로젝트 디렉토리를 생성하고 다음 커맨드를 입력한다.
@@ -96,7 +96,7 @@ Generating 옵션은 다음과 같이 선택하였다.
 npm run serve
 ```
 
-### 베이스 layout 정의 (20200611)
+### 베이스 layout 정의
 
 #### Vuetify 탬플릿 'Google Contacts' 적용
 
@@ -133,7 +133,7 @@ vuetify: {
 클라이언트 사이드에서의 라우팅이란 사용자가 이전 버튼, 북마크를 사용하게끔 URL마다 화면을 만들어두거나, HTML5의 히스토리 API를 사용할 수 있게 하는 등 페이지를 구분하는 과정을 일컫는다.
 Wordpress 를 기조로 보면 `포스트(post), 페이지(page), 카테고리(category), 태그(tag)`와 같은 속성을 지닌 콘텐츠들이 저마다의 퍼머링크를 지니고 있다.
 
-### 사전 계획 (20200611)
+### 사전 계획
 
 #### Wordpress의 글 이름 '퍼머링크' 구조를 모방하여 사용한다?
 
@@ -190,7 +190,7 @@ https://wireframe.kr/tag/tag-name // tag-name Tag에 속한 Post 목록
 
 처리하는 입장에서는 매우 간단명료하나 사용자 편의, SEO 등을 고려할때 과연 이 방법이 최선일지에 대한 의문이 남는다. 우선 가벼운 마음으로 시작한 이 프로젝트가 기본적인 라우팅 작업에서 부터 병목이 생기는걸 원치 않아 이와 같은 방식으로 구성하기로 하였다.
 
-### 구현 (20200611)
+### 구현
 
 Nuxt 개발 환경에서는 routes.js를 생성하여 별도로 라우팅 규칙을 생성해야하는 작업이 생략된다. pages 디렉토리에 파일트리에 따라 자동으로 router 설정을 세팅하여 준다.
 공식문서를 참고하여 라우팅을 구현하자. [NUXTJS Guide : 라우팅](https://ko.nuxtjs.org/guide/routing/)
@@ -260,7 +260,7 @@ Vue의 **methods** 개념에 해당 한다. state를 **동기적으로 변형**�
 #### getters
 Vue의 **computed** 개념에 해당 한다. state 값을 계산하여 반환할 때 쓰인다.
 
-### Vuex store 구성 듀토리얼 (20200612)
+### Vuex store 구성 듀토리얼
 
 Nuxt환경에서의 Vuex
 
@@ -361,7 +361,7 @@ computed: {
 },
 ```
 
-### Post, Page 데이터 구현 (20200612)
+### Post, Page 데이터 구현
 
 시뮬레이션 해본 위의 코드를 참고하여 포스트 싱글페이지, 페이지 싱글페이지에 데이터를 부여할것이다. 다음 디렉토리 구조내의 파일들을 추가하여 작업한다.
 
@@ -383,7 +383,7 @@ store에서 각 포스트, 페이지들의 싱글 콘텐츠를 Wordpress REST AP
 새로고침을 하거나, 다른 페이지를 경유하여 같은 페이지&포스트를 연속으로 방문할때에는 서버에 요청하지않고 state를 그대로 유지하도록 하였다.
 로컬 스토리지(Local Storage)에 가장 최근 경유한 페이지&포스트에 대한 데이터가 저장된다.
 
-### Category, Tag 에 따른 포스트 목록 구현 (20200614)
+### Category, Tag 에 따른 포스트 목록 구현
 
 다음 url로 접속하였을때 각 텍소노미가 아카이빙 되도록 한다.
 
@@ -404,7 +404,7 @@ Facebook에서 사용하는 포스팅 시간 표시 기능이 마음에 들어 �
 * [[Nuxtjs] plugin 이용하여 global methods 만들기](https://medium.com/@Dongmin_Jang/vue-js-global-methods-%EB%A7%8C%EB%93%A4%EA%B8%B0-8578365634e2)
 
 
-### 메뉴 구현 (20200615)
+### 메뉴 구현
 
 메뉴를 구현하였다. 특이사항이 몇가지 있었다. 
 
@@ -454,7 +454,7 @@ drawer: {
 }
 ```
 
-### 검색 구현 (20200615)
+### 검색 구현
 
 블로그 내의 포스트 검색기능을 구현하였다. 다음과 같은 방식을 사용하였다.
 
@@ -465,7 +465,7 @@ drawer: {
 Wordpress REST API에서 제공하는 search만을 이용하여 간단히 구현하였다.
 
 
-## 스타일링 (20200616)
+## 스타일링
 
 `assets/scss` 디렉토리를 구성하여 css를 따로 제어하도록 하였다. 
 다음 명령어로 필요한 플러그인들을 인스톨한다. yarn으로 인스톨하였다.
@@ -540,5 +540,56 @@ plugins: [
 ### vue-disqus plugin
 
 코멘트 기능 삽입을 위해 Disqus를 도입하고자 하였다. [vue-disqus](https://ktquez.github.io/vue-disqus/) 을 통해 Disqus와 연동하였는데 내가 예상한것보다 훨씬 메끄럽게 연동이 가능했다. Disqus에서 shortname만 생성하여 이 정보를 토대로 Disqus를 연동하면 된다. [Nuxt.js 적용 방법](https://ktquez.github.io/vue-disqus/howto/nuxt.html)
+
+## 미비된 사항을 챙기자
+
+### favicon 추가
+
+[favicon.io](https://favicon.io/)에서 favicon을 생성하여 static 디렉토리에 추가하였다. 해당 리소스들을 nuxt.config.js 에서 불러오도록 하였다.
+
+### meta 정보 추가, opengraph 정보 추가
+
+* 다음과 같은 meta 정보를 제공한다 : title, description
+* 다음과 같은 opengraph 정보를 제공한다. : title, description, type, image, url
+
+두 정보는 모두 서버사이드에서 렌더링 되어야하며 [postman](https://www.postman.com/) Get 요청을 통해 체크하도록 한다.
+
+#### 전역 설정
+
+`nuxt.config` 전역설정을 통해 메타 태그와 오픈그래프 정보를 추가한다.
+head에 description meta를 제공하고자 한다면 다음과 같이 추가한다.
+
+``` javascript
+head: {
+    meta: [
+      {
+        hid: 'description',
+        name: 'description',
+        content: '웹 기술에 대해 이야기 합니다.'
+      },
+    ]
+}    
+```
+
+Nuxt 프레임워크에서 제공하는 유니크한 id인 `hid` 를 기입해주어 Page 별로 추가될 meta정보들과의 중복을 방지해주었다.
+
+#### Post/Page Single 콘텐츠 설정
+
+
+#### Category/Tag 별 포스트 리스트 설정
+
+
+#### 검색결과에 설정
+
+
+### 404 Page 추가
+
+
+
+## 빌드
+
+
+
+
 
 
