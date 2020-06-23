@@ -58,6 +58,7 @@
       </v-container>
     </v-content>
     <!--// content area -->
+    <floating-action-button />
   </v-app>
 </template>
 
@@ -65,11 +66,13 @@
 
 import TheSearchForm from '~/components/TheSearchForm'
 import TheNavigationMenu from '~/components/TheNavigationMenu'
+import FloatingActionButton from '~/components/FloatingActionButton'
 
 export default {
   components: {
     TheSearchForm,
-    TheNavigationMenu
+    TheNavigationMenu,
+    FloatingActionButton
   },
   methods: {
     onClickNavIcon() {
