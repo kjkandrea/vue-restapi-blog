@@ -30,11 +30,6 @@
 import TimeStamp from '~/components/TimeStamp'
 
 export default {
-  asyncData({query}) { 
-    if(query.page){
-      //console.log(query.page)
-    }
-  },
   components: {
     TimeStamp
   },
@@ -90,8 +85,27 @@ export default {
         type: 'categories',
         taxonomy : this.taxonomy,
         page : this.page
-      }
-    )},
+      })
+    },
+  },
+  head() {
+    return {
+      title: this.$route.params.slug,
+      meta: [
+        {
+          hid: 'desc', name: 'description', content: `${this.$route.params.slug}에 대한 Post 목록 입니다.`,
+        },
+        {
+          hid: 'ogtitle', property: 'og:title', content: this.$route.params.slug,
+        },
+        {
+          hid: 'ogdesc', property: 'og:description', content: `${this.$route.params.slug}에 대한 Post 목록 입니다.`,
+        },
+        {
+          hid: 'ogurl', property: 'og:url', content: `https://wireframe.kr/category/${this.$route.params.slug}`,
+        }
+      ],
+    }
   }
 };
 </script>

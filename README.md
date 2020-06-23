@@ -579,6 +579,8 @@ Post 콘텐츠에서는 featured_image_url, description이란 객체를 Wordpres
 
 #### Category/Tag 별 포스트 리스트 설정
 
+* 텍소노미 명칭을 title로 제공한다.
+* "{texonomy}에 대한 Post 목록 입니다."를 description으로 제공한다.
 
 #### 검색결과에 설정
 

@@ -19,7 +19,7 @@ export default {
         content: 'width=device-width, initial-scale=1'
       },
       {
-        hid: 'description',
+        hid: 'desc',
         name: 'description',
         content: '웹 기술에 대해 이야기 합니다.'
       },
