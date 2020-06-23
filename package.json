@@ -15,8 +15,7 @@
     "dayjs": "^1.8.28",
     "nuxt": "^2.0.0",
     "tocbot": "^4.11.2",
-    "vue-disqus": "^4.0.0",
-    "vuex-persistedstate": "^3.0.1"
+    "vue-disqus": "^4.0.0"
   },
   "devDependencies": {
     "@nuxtjs/style-resources": "^1.0.0",

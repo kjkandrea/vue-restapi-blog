@@ -95,8 +95,7 @@ export default {
     },
     {
       src: '~/plugins/prism.js'
-    },
-    // { src: '~/plugins/vuex-persistedstate.js', ssr: false },
+    }
   ],
   /*
    ** Nuxt.js dev-modules
