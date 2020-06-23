@@ -90,7 +90,7 @@ export const actions = {
   async requestPostData({ state, commit }, payload) {
     if ( payload === state.slug ) return;
     try {
-      let res = await this.$axios.get(`/v2/posts?slug=${payload}`)
+      let res = await this.$axios.get(`/v2/posts?slug=${payload}&_embed=wp:term`)
       commit('memorizeSlug', payload);
       commit('setStatePostData', res.data[0]);
     } catch(err) {

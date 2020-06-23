@@ -3,6 +3,27 @@
     <template v-if="postData">
       <div class="content-header">
         <h1 v-html="postData.title.rendered" />
+        <v-chip-group
+            v-if="postData._embedded"
+            column
+          >
+          <nuxt-link
+            v-for="category in postData._embedded['wp:term'][0]" 
+            :key="category.id"
+            :to="{ name: 'category-slug',  params: { slug: category.slug } }"
+            style="text-decoration:none !important"
+          >
+            <v-chip
+              small
+              color="pink"
+              label
+              text-color="white"
+            >
+              <v-icon x-small left>mdi-label</v-icon>
+              {{category.name}}
+            </v-chip>
+          </nuxt-link>
+        </v-chip-group>
         <time-stamp :time=postData.date />
       </div>
       <div class="js-toc">
