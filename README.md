@@ -575,6 +575,7 @@ Nuxt 프레임워크에서 제공하는 유니크한 id인 `hid` 를 기입해�
 
 #### Post/Page Single 콘텐츠 설정
 
+Post 콘텐츠에서는 featured_image_url, description이란 객체를 Wordpress 백엔드에서 추가하여 오픈그래프 정보로 제공하였다.
 
 #### Category/Tag 별 포스트 리스트 설정
 
