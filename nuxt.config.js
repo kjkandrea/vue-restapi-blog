@@ -36,7 +36,7 @@ module.exports = {
       }, {
         hid: 'ogimage',
         property: 'og:image',
-        content: 'https://wireframe.kr/wp-content/uploads/2020/06/shape.png',
+        content: 'https://wireframe.shoplic.store/wp-content/uploads/2020/06/shape.png',
       }, {
         hid: 'ogurl',
         property: 'og:url',
@@ -113,7 +113,7 @@ module.exports = {
    ** See https://axios.nuxtjs.org/options
    */
   axios: {
-    baseURL: process.env.BASE_URL || 'https://wireframe.kr/wp-json/wp'
+    baseURL: process.env.BASE_URL || 'https://wireframe.shoplic.store/wp-json/wp'
   },
   router: {
     extendRoutes (routes, resolve) {
