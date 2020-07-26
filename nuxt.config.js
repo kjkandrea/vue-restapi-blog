@@ -1,6 +1,4 @@
-import colors from 'vuetify/es5/util/colors'
-
-export default {
+module.exports = {
   mode: 'universal',
   /*
    ** Headers of the page
@@ -158,5 +156,18 @@ export default {
       }
       //console.log('webpack', config, isServer, isClient);
     },
+    extractCss: true,
+    babel: {
+      presets: ({ isServer }) => [
+        [
+          '@nuxt/babel-preset-app',
+          {
+            targets: isServer
+              ? { node: '10.21.0' }
+              : { browsers: ['defaults'] }
+          }
+        ]
+      ]
+    }
   }
 }
