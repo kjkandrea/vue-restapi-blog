@@ -61,7 +61,7 @@ export const actions = {
     if(lastDate === now && state.lastFetchTexonomy === payload) return;
     
     try {
-      let res = await this.$axios.get(`/v2/${payload}?_fields=id,count,name,slug`)
+      let res = await this.$axios.get(`/v2/${payload}?_fields=id,count,name,slug&per_page=99`)
       commit('setStateTaxonomiesData', res.data);
       commit('memorizeLastFetchTexonomy', payload);
       commit('memorizeLastFetchDates');
