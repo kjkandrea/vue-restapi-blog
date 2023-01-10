@@ -14,7 +14,7 @@
   "dependencies": {
     "@nuxtjs/axios": "^5.3.6",
     "dayjs": "^1.8.28",
-    "firebase-admin": "^8.10.0",
+    "firebase-admin": "^11.4.1",
     "firebase-functions": "^3.6.1",
     "nuxt-start": "^2.13.3",
     "tocbot": "^4.11.2",
